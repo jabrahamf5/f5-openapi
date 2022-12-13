@@ -13,20 +13,22 @@ from dash import html
 from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 
+
 # Presets: Define Open AI Requirements here
 def run_preset(query):
-  response = openai.Completion.create(
-    engine="text-davinci-003",
-    prompt=query,
-    temperature=0.7,
-    max_tokens=800,
-    top_p=1.0,
-    frequency_penalty=0.0,
-    presence_penalty=0.0
-    #stop=["#", ";"]
-  )
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=query,
+        temperature=0.7,
+        max_tokens=800,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0
+        # stop=["#", ";"]
+    )
 
-  return response.choices[0].text
+    return response.choices[0].text
+
 
 # Build App
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -52,34 +54,36 @@ app.layout = html.Div([
         placeholder="Load a preset configuration"
     ),
     dcc.Textarea(
-          id='textarea-query',
-          value='',
-          placeholder="Type a query in natural language or select a preset above",
-          style={'width': '100%', 'height': 200},
+        id='textarea-query',
+        value='',
+        placeholder="Type a query in natural language or select a preset above",
+        style={'width': '100%', 'height': 200},
     ),
     html.Div(id='textarea-query-output', style={'whiteSpace': 'pre-line', 'padding-top': '10px'}),
-    html.Button('Generate', id='button-generate',n_clicks=0),
+    html.Button('Generate', id='button-generate', n_clicks=0),
     html.Div(id='div-output-results', style={'padding-top': '10px'}),
     html.Pre(
         id='div-output-results2',
         style={
-          'height': 400,
-          'overflow': 'auto',
-          'font-family': 'courier new',
-          'font-weight': 'bold',
-          'color': 'white',
-          'background-color': 'LightSlateGrey',
-          'padding': '10px',
-          'font-size': '100%',
-          'border': 'solid 1px #A2B1C6'
-          }
-        ),
+            'height': 400,
+            'overflow': 'auto',
+            'font-family': 'courier new',
+            'font-weight': 'bold',
+            'color': 'white',
+            'background-color': 'LightSlateGrey',
+            'padding': '10px',
+            'font-size': '100%',
+            'border': 'solid 1px #A2B1C6'
+        }
+    ),
 ], style={
-        'border': 'solid 1px #A2B1C6',
-        'border-radius': '5px',
-        'padding': '20px',
-        'margin-top': '10px'
-    })
+    'border': 'solid 1px #A2B1C6',
+    'border-radius': '5px',
+    'padding': '20px',
+    'margin-top': '10px'
+})
+
+
 ##
 ## Called when Preset dropdown is selected
 ##
@@ -91,29 +95,31 @@ def update_output(dropdown):
     ##return 'You have selected query "{}"'.format(get_query_from_preset(dropdown))
     return get_query_from_preset(dropdown)
 
+
 def get_query_from_preset(preset):
-  query = ''
-  if preset == '01':
+    query = ''
+    if preset == '01':
         query = "Write an nginx config to do:"
-  elif preset == '02':
+    elif preset == '02':
         query = ""
-  elif preset == '03':
+    elif preset == '03':
         query = "Write a BIG-IP web application firewall config to do the following:"
-  elif preset == '04':
+    elif preset == '04':
         query = "Write a BIG-IP iRule for the following:"
-  elif preset == '05':
+    elif preset == '05':
         query = ""
-  elif preset == '06':
+    elif preset == '06':
         query = ""
-  elif preset == '07':
+    elif preset == '07':
         query = ""
-  elif preset == '08':
+    elif preset == '08':
         query = ""
-  elif preset == '09':
+    elif preset == '09':
         query = ""
-  elif preset == '10':
+    elif preset == '10':
         query = ""
-  return query
+    return query
+
 
 ##
 ## Called when the Button 'Generate' is pushed
@@ -126,14 +132,17 @@ def get_query_from_preset(preset):
 
 )
 def update_output2(textarea, preset, n_clicks):
-
     if n_clicks is None or n_clicks == 0:
         return '(nothing generated yet)'
     else:
         ## Execute dynamically the 'run_preset_nn' function (where 'nn' is the preset number)
-        #results = globals()['run_preset_%s' % preset](textarea)
+        # results = globals()['run_preset_%s' % preset](textarea)
         results = globals()['run_preset'](textarea)
         return results
 
+
 # Run app and display result inline in the notebook
-app.run_server(port=8118, debug=False)
+if __name__ == '__main__':
+    app.run_server(port=8118, debug=False)
+else:
+    application = app.server
