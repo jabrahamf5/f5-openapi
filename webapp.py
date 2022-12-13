@@ -136,4 +136,9 @@ def update_output2(textarea, preset, n_clicks):
         return results
 
 # Run app and display result inline in the notebook
-app.run_server(port=8118, debug=False)
+
+# Comment this out, otherwise this would block the other executions
+# app.run_server(port=8118, debug=False)
+
+# Add this line
+application = app.server
