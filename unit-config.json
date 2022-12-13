@@ -1,0 +1,17 @@
+{
+    "listeners": {
+        "*:8080": {
+            "pass": "applications/dash"
+        }
+    },
+    "applications": {
+        "dash": {
+            "type": "python 3",
+            "path": "/eve",
+            "home": "/eve/venv",
+            "module": "webapp",
+            "user": "root"
+        }
+    },
+    "routes": {}
+}
