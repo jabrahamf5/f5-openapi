@@ -1,0 +1,22 @@
+{
+    "app": {
+        "name": "myapp",
+        "primary": {
+            "type": "flask",
+            "config": {
+                "module": "webapp",
+                "callable": "application"
+            }
+        }
+    },
+    "deployment": "mydeploy",
+    "sources": {
+        "name": "myrepo",
+        "primary": {
+            "branch": "main",
+            "type": "repository",
+            "organization": "amalrajan",
+            "uri": "https://github.com/amal-f5/eve"
+        }
+    }
+}
