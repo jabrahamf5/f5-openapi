@@ -125,7 +125,7 @@ def get_query_from_preset(preset):
     elif preset == '09':
         query = ""
     elif preset == '10':
-        query = ""
+        query = "List F5 Products"
     return query
 
 
