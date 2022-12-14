@@ -143,6 +143,6 @@ def update_output2(textarea, preset, n_clicks):
 
 # Run app and display result inline in the notebook
 if __name__ == '__main__':
-    app.run_server(port=8118, debug=False)
+    app.run_server(port=8218, debug=False)
 else:
     application = app.server
