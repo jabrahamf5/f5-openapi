@@ -109,7 +109,7 @@ def get_query_from_preset(preset):
     if preset == '01':
         query = "Write an nginx config to do:"
     elif preset == '02':
-        query = "Generate a BIG-IP Configuration"
+        query = ""
     elif preset == '03':
         query = "Write a BIG-IP web application firewall config to do the following:"
     elif preset == '04':
@@ -123,9 +123,9 @@ def get_query_from_preset(preset):
     elif preset == '08':
         query = ""
     elif preset == '09':
-        query = "Build your Open Telemetry code"
+        query = ""
     elif preset == '10':
-        query = "List F5 Products"
+        query = ""
     return query
 
 
