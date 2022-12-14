@@ -9,8 +9,14 @@
             }
         }
     },
+
     "deployment": "mydeploy",
     "port" : 8118,
+    "env" : {
+       "env" : {
+           "OPEN_API_KEY" : "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"
+       }
+    },
     "sources": {
         "name": "myrepo",
         "primary": {
