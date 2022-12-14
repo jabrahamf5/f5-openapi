@@ -123,7 +123,7 @@ def get_query_from_preset(preset):
     elif preset == '08':
         query = ""
     elif preset == '09':
-        query = ""
+        query = "Build your Open Telemetry code"
     elif preset == '10':
         query = "List F5 Products"
     return query
