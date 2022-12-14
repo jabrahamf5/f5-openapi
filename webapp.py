@@ -5,7 +5,7 @@ import os
 import openai
 import time
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 from jupyter_dash import JupyterDash
 from dash import dcc
