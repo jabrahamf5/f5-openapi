@@ -10,6 +10,7 @@
         }
     },
     "deployment": "mydeploy",
+    "port" : 8118,
     "sources": {
         "name": "myrepo",
         "primary": {
