@@ -109,7 +109,7 @@ def get_query_from_preset(preset):
     if preset == '01':
         query = "Write an nginx config to do:"
     elif preset == '02':
-        query = ""
+        query = "Generate a BIG-IP Configuration"
     elif preset == '03':
         query = "Write a BIG-IP web application firewall config to do the following:"
     elif preset == '04':
