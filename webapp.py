@@ -5,29 +5,37 @@ import os
 import openai
 import time
 
-openai.api_key = "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"
-
 from jupyter_dash import JupyterDash
 from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output, State
 import dash_bootstrap_components as dbc
 
+openai.api_key = os.getenv("API_KEY")
+
 
 # Presets: Define Open AI Requirements here
 def run_preset(query):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=query,
-        temperature=0.7,
-        max_tokens=800,
-        top_p=1.0,
-        frequency_penalty=0.0,
-        presence_penalty=0.0
-        # stop=["#", ";"]
-    )
 
-    return response.choices[0].text
+    result = ""
+
+    try :
+        response = openai.Completion.create(
+            engine="text-davinci-003",
+            prompt=query,
+            temperature=0.7,
+            max_tokens=800,
+            top_p=1.0,
+            frequency_penalty=0.0,
+            presence_penalty=0.0
+            # stop=["#", ";"]
+        )
+        result = response.choices[0].text
+
+    except openai.error.AuthenticationError as inst:
+        result = "openai AuthenticationError: Please verify your API KEY is valid (It may have been rotated by openai"
+
+    return result
 
 
 # Build App
@@ -85,14 +93,14 @@ app.layout = html.Div([
 
 
 ##
-## Called when Preset dropdown is selected
+# Called when Preset dropdown is selected
 ##
 @app.callback(
     Output(component_id='textarea-query', component_property='value'),
     Input(component_id='dropdown-preset', component_property='value'),
 )
 def update_output(dropdown):
-    ##return 'You have selected query "{}"'.format(get_query_from_preset(dropdown))
+    # return 'You have selected query "{}"'.format(get_query_from_preset(dropdown))
     return get_query_from_preset(dropdown)
 
 
@@ -135,14 +143,14 @@ def update_output2(textarea, preset, n_clicks):
     if n_clicks is None or n_clicks == 0:
         return '(nothing generated yet)'
     else:
-        ## Execute dynamically the 'run_preset_nn' function (where 'nn' is the preset number)
+        # Execute dynamically the 'run_preset_nn' function (where 'nn' is the preset number)
         # results = globals()['run_preset_%s' % preset](textarea)
         results = globals()['run_preset'](textarea)
         return results
 
 
-# Run app and display result inline in the notebook
-if __name__ == '__main__':
-    app.run_server(port=8218, debug=False)
+if __name__ == "__main__":
+    app.run_server(port=8118, debug=False)
 else:
     application = app.server
+
